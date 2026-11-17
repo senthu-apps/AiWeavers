@@ -612,6 +612,5 @@ export const FOOTER = {
     { label: "Privacy Policy", href: "/privacy" },
     { label: "Terms of Service", href: "/terms" },
   ],
-  social: ["LinkedIn", "YouTube"],
   copyright: "© 2026 AI Weavers. All rights reserved.",
 };

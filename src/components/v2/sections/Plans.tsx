@@ -57,24 +57,28 @@ export function Plans() {
               )}
               {p.featured && <span aria-hidden className="price-tier-accent" />}
 
-              <div data-rise className="flex flex-1 flex-col px-5 py-8 md:px-8 md:py-10 lg:px-8 lg:pb-10 lg:pt-8 xl:px-9">
-                <div className="flex min-h-[3.25rem] items-start justify-between gap-4">
-                  <IsoIcon name={p.icon} className="-ml-1 size-[3.25rem]" />
-                  {p.featured && <span className="price-tag">{PRICING.badge}</span>}
+              <div data-rise className="flex flex-1 flex-col p-2 md:p-2.5">
+                {/* the head: name and price on an inset panel (the featured plan's in the ember gradient) */}
+                <div className="price-head relative overflow-hidden rounded-[18px] px-4 pb-6 pt-5 md:px-6 md:pb-7 md:pt-6">
+                  <div className="relative flex min-h-[3.25rem] items-start justify-between gap-4">
+                    <IsoIcon name={p.icon} className="-ml-1 size-[3.25rem]" />
+                    {p.featured && <span className="price-tag">{PRICING.badge}</span>}
+                  </div>
+                  <h3 id={`plan-${p.name.toLowerCase()}`} className="relative mt-5 text-[1.375rem] font-semibold leading-tight tracking-[-0.03em] text-ink">
+                    {p.name}
+                  </h3>
+                  <p className="price-head-label relative mt-1.5 text-[0.8125rem] font-medium text-muted">{PRICING.bestFor}</p>
+                  <p className="price-head-body relative mt-0.5 text-pretty text-[0.9375rem] leading-[1.5] text-graphite">{p.bestFor}</p>
+
+                  <p className="price-head-label relative mt-7 text-[0.8125rem] font-medium text-muted">{PRICING.monthlyFee}</p>
+                  <p className="relative mt-1.5 flex items-end gap-2">
+                    <span className="text-[clamp(2.5rem,3.6vw,3rem)] font-semibold leading-none tracking-[-0.045em] tabular-nums text-ink">{p.price}</span>
+                    <span className="price-head-label pb-[0.3rem] text-[0.9375rem] leading-none text-muted">{PRICING.unit}</span>
+                  </p>
                 </div>
-                <h3 id={`plan-${p.name.toLowerCase()}`} className="mt-5 text-[1.375rem] font-semibold leading-tight tracking-[-0.03em] text-ink">
-                  {p.name}
-                </h3>
-                <p className="mt-1.5 text-[0.8125rem] font-medium text-muted">{PRICING.bestFor}</p>
-                <p className="mt-0.5 text-pretty text-[0.9375rem] leading-[1.5] text-graphite">{p.bestFor}</p>
 
-                <p className="mt-7 text-[0.8125rem] font-medium text-muted">{PRICING.monthlyFee}</p>
-                <p className="mt-1.5 flex items-end gap-2">
-                  <span className="text-[clamp(2.5rem,3.6vw,3rem)] font-semibold leading-none tracking-[-0.045em] tabular-nums text-ink">{p.price}</span>
-                  <span className="pb-[0.3rem] text-[0.9375rem] leading-none text-muted">{PRICING.unit}</span>
-                </p>
-
-                <dl className="mt-7 border-t border-line">
+                <div className="flex flex-1 flex-col px-3 pb-6 pt-2 md:px-[1.375rem] md:pb-7">
+                <dl>
                   {PLAN_ROWS.map(({ label, values }) => (
                     <div key={label} className="flex items-baseline justify-between gap-4 border-b border-line py-3 text-[0.9375rem] lg:min-h-[4.375rem]">
                       <dt className="max-w-[9.5rem] text-pretty text-graphite">{label}</dt>
@@ -90,6 +94,7 @@ export function Plans() {
                       <Arrow />
                     </span>
                   </a>
+                </div>
                 </div>
               </div>
             </article>

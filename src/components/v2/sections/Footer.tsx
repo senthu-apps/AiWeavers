@@ -7,12 +7,9 @@ import { ParticleWordmark } from "@/components/brand/ParticleWordmark";
 import { RailMarks, Rails, Rule } from "@/components/site/Rails";
 import { FOOTER } from "@/components/v2/content";
 
-/** Links whose URLs aren't supplied yet (social). */
-const toCome = (e: React.MouseEvent) => e.preventDefault();
-
 /**
  * 15 · Footer — the live dark band and particle wordmark, carrying the doc's
- * footer: company line, contact, navigation, legal and social links, copyright.
+ * footer: company line, contact, navigation and legal links, copyright.
  * (The live footer's "Ready to weave" call to action isn't in the doc; the
  * booking section right above does that job.)
  */
@@ -46,18 +43,13 @@ export function Footer({ base = "" }: { base?: string }) {
     { scope: root },
   );
 
-  const col = (title: string, links: { label: string; href?: string }[]) => (
+  const col = (title: string, links: { label: string; href: string }[]) => (
     <div key={title}>
       <h3 className="text-[0.8125rem] font-medium text-muted">{title}</h3>
       <ul className="mt-4 grid gap-3">
         {links.map((l) => (
           <li key={l.label}>
-            <a
-              href={l.href ? at(l.href) : "#"}
-              onClick={l.href ? undefined : toCome}
-              title={l.href ? undefined : "Link to come"}
-              className="foot-link text-[0.9375rem]"
-            >
+            <a href={at(l.href)} className="foot-link text-[0.9375rem]">
               {l.label}
             </a>
           </li>
@@ -93,13 +85,9 @@ export function Footer({ base = "" }: { base?: string }) {
               </a>
             </p>
           </div>
-          <nav data-foot-rise aria-label="Footer" className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-7">
+          <nav data-foot-rise aria-label="Footer" className="grid grid-cols-2 gap-8 lg:col-span-7">
             {col("Navigation", FOOTER.nav)}
             {col("Legal", FOOTER.legal)}
-            {col(
-              "Social",
-              FOOTER.social.map((label) => ({ label })),
-            )}
           </nav>
         </div>
 
