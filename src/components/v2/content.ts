@@ -338,12 +338,19 @@ export const PLANS: { name: string; price: string; bestFor: string; icon: IsoNam
   { name: "Pro", price: "$2,995", bestFor: "Several teams, agents in daily use", icon: "layers", featured: true },
   { name: "Scale", price: "$4,995", bestFor: "Company-wide, custom software", icon: "chart" },
 ];
-export const PLAN_ROWS: [string, string][] = [
-  ["Scope", "Set with you on the audit call"],
-  ["Dedicated Delivery Manager", "Included"],
-  ["Monitoring and fixes", "Included"],
-  ["First project live", "2 weeks"],
+/** What changes between plans; values run Growth, Pro, Scale (placeholders to tune to real capacity). */
+export const PLAN_ROWS: { label: string; values: [string, string, string] }[] = [
+  { label: "What we build", values: ["Workflow automations", "Automations + AI agents", "Automations, agents + custom software"] },
+  { label: "Active projects at once", values: ["1", "2", "4"] },
+  { label: "Teams covered", values: ["1 team", "Up to 3 teams", "Company-wide"] },
+  { label: "Request response time", values: ["2 business days", "1 business day", "Same day, priority queue"] },
+  { label: "Delivery Manager cadence", values: ["Monthly review", "Biweekly call", "Weekly call + quarterly roadmap"] },
 ];
+/** Identical in every plan, so shown once as a strip under the cards instead of three times. */
+export const PLAN_INCLUDED = {
+  title: "Included in every plan",
+  items: ["Dedicated Delivery Manager", "Monitoring and fixes", "First project live in 2 weeks"],
+};
 export const PRICING = {
   unit: "/ month",
   monthlyFee: "Monthly fee",
@@ -383,7 +390,7 @@ export const TEAM = {
     /* the card's second caption line under the name */
     caption: "Why we built AI Weavers, in about a minute.",
     /* Bunny CDN: a direct .mp4 (plays in a native <video>); an embed URL (iframe.mediadelivery.net/embed/…) would render as an iframe instead */
-    src: "https://aiweavers.b-cdn.net/how-AI-Weavers-new.mp4",
+    src: "https://aiweavers.b-cdn.net/how-ai-weavers-automates-your-business-v1.mp4",
     poster: "/people/senthu-video-poster.jpg",
   },
   /* the modal the play button opens: vertical video left, this copy and the call to action right (draft copy, to review) */

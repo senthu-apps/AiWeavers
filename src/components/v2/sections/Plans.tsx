@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { IsoIcon } from "@/components/brand/Iso";
 import { Cross, Rule } from "@/components/site/Rails";
-import { PLANS, PLAN_ROWS, PRICING, PRICING_HEAD, BOOK } from "@/components/v2/content";
+import { PLANS, PLAN_INCLUDED, PLAN_ROWS, PRICING, PRICING_HEAD, BOOK } from "@/components/v2/content";
 import { Arrow, SectionHead, useReveal } from "@/components/v2/parts";
 
 /** Dollar figures in a line of small print set in ink and semibold, so the numbers read first. */
@@ -75,19 +75,10 @@ export function Plans() {
                 </p>
 
                 <dl className="mt-7 border-t border-line">
-                  {PLAN_ROWS.map(([k, v]) => (
-                    <div key={k} className="flex items-baseline justify-between gap-4 border-b border-line py-3 text-[0.9375rem]">
-                      <dt className="text-graphite">{k}</dt>
-                      <dd className="flex shrink-0 items-center gap-2 text-right font-medium text-ink">
-                        {v === "Included" && (
-                          <span className="price-check price-check-strong">
-                            <svg viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                              <path d="M3 7.4 5.8 10 11 4.2" />
-                            </svg>
-                          </span>
-                        )}
-                        <span className={v.length > 14 ? "max-w-[11rem] text-pretty" : ""}>{v}</span>
-                      </dd>
+                  {PLAN_ROWS.map(({ label, values }) => (
+                    <div key={label} className="flex items-baseline justify-between gap-4 border-b border-line py-3 text-[0.9375rem] lg:min-h-[4.375rem]">
+                      <dt className="max-w-[9.5rem] text-pretty text-graphite">{label}</dt>
+                      <dd className="max-w-[12rem] text-pretty text-right font-medium text-ink">{values[i]}</dd>
                     </div>
                   ))}
                 </dl>
@@ -103,6 +94,26 @@ export function Plans() {
               </div>
             </article>
           ))}
+        </div>
+        <Rule className="relative" />
+
+        {/* the rows every plan shares, said once */}
+        <div className="-mx-5 md:mx-0 md:border-x md:border-rail">
+          <div data-rise className="flex flex-col gap-4 px-5 py-6 md:px-8 lg:flex-row lg:items-center lg:gap-10 lg:px-10">
+            <p className="shrink-0 text-[0.8125rem] font-medium text-muted">{PLAN_INCLUDED.title}</p>
+            <ul className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-x-8">
+              {PLAN_INCLUDED.items.map((item) => (
+                <li key={item} className="flex items-center gap-2 text-[0.9375rem] font-medium text-ink">
+                  <span className="price-check price-check-strong">
+                    <svg viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                      <path d="M3 7.4 5.8 10 11 4.2" />
+                    </svg>
+                  </span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
         <Rule className="relative" />
 

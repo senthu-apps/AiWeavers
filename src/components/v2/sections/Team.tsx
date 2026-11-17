@@ -51,7 +51,7 @@ function FounderVideo({ onReveal }: { onReveal: () => void }) {
       onTimeUpdate={(e) => {
         if (e.currentTarget.currentTime >= REVEAL_AFTER) onReveal();
       }}
-      className="size-full object-cover"
+      className="size-full object-cover object-[50%_15%]"
     />
   );
 }
@@ -95,6 +95,9 @@ export function Team() {
       return;
     }
     if (!d.open) d.showModal();
+    // showModal focuses the first button (the close ×) and paints its focus ring on open; park focus
+    // on the panel instead, so Tab still reaches the close button next.
+    p.focus({ preventScroll: true });
     document.body.style.overflow = "hidden";
     if (prefersReducedMotion()) return; // the whole panel at once, no reveal
     const fit = () => {
@@ -206,11 +209,11 @@ export function Team() {
             <figure data-rise className="ops-card team-card p-3">
               <div className="team-video relative aspect-video overflow-hidden rounded-[16px]">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/people/senthu-video-thumb.jpg" alt="Senthu Velnayagam" className="team-video-photo absolute left-[-43.27%] top-[-28%] h-[143.32%] w-[143.24%] max-w-none" />
+                <img src="/people/senthu-video-thumb.jpg" alt="Senthu Velnayagam" className="team-video-photo absolute inset-0 size-full object-cover" />
                 <div aria-hidden className="team-video-shade absolute inset-0" />
                 <div aria-hidden className="team-video-grain absolute inset-0" />
                 <span className="absolute left-4 top-4 flex items-center gap-2 font-mono text-[0.6875rem] text-white/75">
-                  <LiveDot /> 67 sec
+                  <LiveDot /> 66 sec
                 </span>
                 <button
                   type="button"
@@ -261,7 +264,8 @@ export function Team() {
       >
         <div
           ref={panel}
-          className="team-modal-panel ops-light relative grid max-h-[92vh] w-[min(92vw,64rem)] overflow-y-auto rounded-[24px] bg-white text-ink shadow-[0_40px_90px_-30px_rgb(0_0_0/0.7)] md:grid-cols-[auto_minmax(0,1fr)]"
+          tabIndex={-1}
+          className="team-modal-panel ops-light outline-none relative grid max-h-[92vh] w-[min(92vw,64rem)] overflow-y-auto rounded-[24px] bg-white text-ink shadow-[0_40px_90px_-30px_rgb(0_0_0/0.7)] md:grid-cols-[auto_minmax(0,1fr)]"
         >
           <button
             ref={closeBtn}
